@@ -6,7 +6,7 @@ PASS_CREDENTIALS = ""
 
 
 
-
+fr
 
 def scraper_from_UPC():
     response = requests.get("https://api.fib.upc.edu/")
