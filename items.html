@@ -8,9 +8,9 @@
     <script src="main.js"></script>
 </head>
 
-<body class="text-center">
+<body class="text-center" onload="loadProc()">
     <div class="form-signin">
-      <input type="email" id="inputSearch" class="form-control" placeholder="" required autofocus onsubmit="querySearch()">
+      <input type="email" id="inputSearch" class="form-control" placeholder="" required autofocus>
       <br>
       <div class="container">
         <div class="row">
@@ -31,15 +31,7 @@
                     <th>Objectives</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>Tiger Nixon</td>
-                    <td>System Architect</td>
-                    <td>Edinburgh</td>
-                    <td>61</td>
-                    <td>2011-04-25</td>
-                    <td>$320,800</td>
-                </tr>
+            <tbody id="results">
             </tbody>
         </table>
     </div>
