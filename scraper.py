@@ -119,35 +119,40 @@ def load_to_es(client, courses):
 
 def course_search(query_string):
     client = connect_elastic()
-    query = {
-        "bool": {
-            "filter": {
-                "term": {
-                    "name": query_string
-                }
+    query_id = {
+            "bool": {
+                "filter":
+                    {"term": {"id": query_string}}
             }
         }
-    }
 
-    query_s = {
+    query_name = {
         "match": {
-                    "description": query_string
+            "name": query_string
         }
     }
-    results = client.search(index="upc_courses3", query=query_s)
-    print(results)
 
+    query_description = {
+        "match": {
+            "description": query_string
+        }
+    }
+    results1 = client.search(index="upc_courses3", query=query_id)
+    results2 = client.search(index="upc_courses3", query=query_name)
+    results3 = client.search(index="upc_courses3", query=query_description)
+
+    return results1["hits"]["hits"]+results2["hits"]["hits"]+results3["hits"]["hits"]
 
 
 if __name__ == '__main__':
     # scraper
-    #json_response = scraper_from_UPC()
-    #upc_courses = get_courses(json_response)
-    #load_as_json(upc_courses)
+    # json_response = scraper_from_UPC()
+    # upc_courses = get_courses(json_response)
+    # load_as_json(upc_courses)
 
     # elasticsearch
     # delete_index("upc_courses")
     # clt = create_elastic()
     # load_to_es(clt, upc_courses)
 
-    course_search("Algebra")
+    course_search("mathematics")
